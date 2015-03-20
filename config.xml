@@ -2,16 +2,16 @@
     <widget xmlns   = "http://www.w3.org/ns/widgets"
         xmlns:gap   = "http://phonegap.com/ns/1.0"
 	xmlns:android   = "http://schemas.android.com/apk/res/android"
-        id          = "edu.iupui.n300.DeviceMotion"
+        id          = "edu.iupui.n300.SimplePhoto"
         version     = "1.0.0" >
 
-    <name>Device Motion</name>
+    <name>Simple Photo</name>
 
     <description>
-        Demonstrate Device Motion
+        A simple photo tool.
     </description>
 
-    <author href="https://github.com/ProfessorKevinForbes/DeviceMotion" email="professorkevinforbes@gmail.com">
+    <author href="https://github.com/ProfessorKevinForbes/Simple-Photo" email="professorkevinforbes@gmail.com">
         Kevin Forbes
     </author>
 
@@ -26,12 +26,15 @@
               android:targetSdkVersion="19"
               android:maxSdkVersion="19" />
 
-
-<feature name="Accelerometer">
-    <param name="ios-package" value="CDVAccelerometer" />
+<feature name="Camera">
+    <param name="ios-package" value="CDVCamera" />
 </feature>
 
+<feature name="Camera">
+    <param name="android-package" value="org.apache.cordova.CameraLauncher" />
+</feature>
 
-<gap:plugin name="org.apache.cordova.device" version="0.2.12" />
-<gap:plugin name="org.apache.cordova.device-motion" version="0.2.10" />
+<gap:plugin name="org.apache.cordova.camera" version="0.3.2" />
+<gap:plugin name="org.apache.cordova.media" version="0.2.13" />
+
 </widget>
