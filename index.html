@@ -1,51 +1,79 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Tic Tac Toe</title>
-		 <link rel="stylesheet" type="text/css" href="stylesheet4.css">
-<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-<script type="text/javascript" src="ttt4.js"></script>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyB0FM5TxM9gJEZkgIWNeXWVh8ApoicY6oo&sensor=false"> </script>
+    <script>
+    
+    var map;
+    var marker;
+    google.maps.event.addDomListener(window, 'load', initialize);
+    
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-	</head>
+    function onDeviceReady() {
+	navigator.geolocation.getCurrentPosition(setupMap, onError);
+        // Throw an error if no update is received every 30 seconds
+    }
 
-	<body>
-		<div id="div0">
-		<center>
-		<h1>Tic Toe Toe</h1>
-		</center>
-		</div>	
-		
-		<div id="div1">
-		<h2 id="h2one">Controls</h2>
-		<ul>
-			<li><a href="" onclick="clearGame()">New Game</a></li>
-			<li>Scoreboard</li>
-		</ul>
-		</div>
-		<br clear="all"/>
 
-		<div id="div2">
-		<h2 id="h2two">Players</h2>
-		<div id="label1">
-		<img class="avatar" id="player1image" src="profile7.png" onclick="changePhoto('player1image')" />
-		Player 1: X
-		</div>
-		<div id="label2">
-		<img class="avatar" id="player2image" src="profile7.png" onclick="changePhoto('player2image')" />
-		Player 2: O
-		</div>
+    function initialize() {
+  	var mapOptions = {
+    		zoom: 8,
+	        center: new google.maps.LatLng(-34.397, 150.644)
+  	};
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    }
 
-			<img id="board" src="board.png" />
-			<img class="move" id="box1" src="blank.png" onclick="toggleBox('box1')" />
-			<img class="move" id="box2" src="blank.png" onclick="toggleBox('box2')" />
-			<img class="move" id="box3" src="blank.png" onclick="toggleBox('box3')" />
-			<img class="move" id="box4" src="blank.png" onclick="toggleBox('box4')" />
-			<img class="move" id="box5" src="blank.png" onclick="toggleBox('box5')" />
-			<img class="move" id="box6" src="blank.png" onclick="toggleBox('box6')" />
-			<img class="move" id="box7" src="blank.png" onclick="toggleBox('box7')" />
-			<img class="move" id="box8" src="blank.png" onclick="toggleBox('box8')" />
-			<img class="move" id="box9" src="blank.png" onclick="toggleBox('box9')" />
-		</div>
+    function setupMap(position) {
+	var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        map.setCenter(pos);
 
-	</body>
+        marker = new google.maps.Marker({
+            position: pos,
+            map: map,
+            title: "<div style = 'height:60px;width:200px'><b>Your location:</b><br />Latitude: " + position.coords.latitude + "<br />Longitude: " + position.coords.longitude + "</div"
+        });
+
+        google.maps.event.addListener(marker, "click", function (e) {
+            var infoWindow = new google.maps.InfoWindow();
+            infoWindow.setContent(marker.title);
+            infoWindow.open(map, marker);
+        });
+
+        var options = { timeout: 30000 };
+        watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+    }
+
+
+    function onSuccess(position) {
+	var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        //map.setCenter(pos);
+	marker.setPosition(pos);
+
+    }
+
+    function onError(error) {
+            alert('code: '    + error.code    + '\n' +
+                  'message: ' + error.message + '\n');
+    }
+
+
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
 </html>
+
