@@ -1,117 +1,53 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Capture Photo</title>
-    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1"/>
-    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-    <script type="text/javascript" charset="utf-8">
+	<head>
+		<title>Tic Tac Toe</title>
+		 <link rel="stylesheet" type="text/css" href="stylesheetJS.css">
 
-    var pictureSource;   // picture source
-    var destinationType; // sets the format of returned value 
+<script type="text/javascript" src="ttt.js"></script>
+<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+<script type="text/javascript" src="photo.js"></script>
 
-    // Wait for PhoneGap to connect with the device
-    //
-    document.addEventListener("deviceready",onDeviceReady,false);
+	</head>
 
-    // PhoneGap is ready to be used!
-    //
-    function onDeviceReady() {
-        pictureSource=navigator.camera.PictureSourceType;
-        destinationType=navigator.camera.DestinationType;
-    }
+	<body>
+		<div id="div0">
+		<center>
+		<h1>Tic Toe Toe</h1>
+		</center>
+		</div>	
+		
+		<div id="div1">
+		<h2 id="h2one">Controls</h2>
+		<ul>
+			<li><a href="" onclick="clearGame()">New Game</a></li>
+			<li>Scoreboard</li>
+		</ul>
+		</div>
+		<br clear="all"/>
 
-    // Called when a photo is successfully retrieved
-    //
-    function onPhotoDataSuccess(imageData) {
-      // Get image handle
-      //
-      var smallImage = document.getElementById('smallImage');
+		<div id="div2">
+		<h2 id="h2two">Players</h2>
+		<div id="label1">
+			<img id="smallimage" src="" onclick="capturePhotoWithData();/>
+			Player 1: X
+		</div>
+		<div id="label2">
+			<img src="" onclick="capturePhotoWithData();/>
+			Player 2: O
+		</div>
 
-      // Unhide image elements
-      //
-      smallImage.style.display = 'block';
+			<img id="board" src="board.png" />
+			<img id="box1" src="blank.png" onclick="toggleBox('box1')" />
+			<img id="box2" src="blank.png" onclick="toggleBox('box2')" />
+			<img id="box3" src="blank.png" onclick="toggleBox('box3')" />
+			<img id="box4" src="blank.png" onclick="toggleBox('box4')" />
+			<img id="box5" src="blank.png" onclick="toggleBox('box5')" />
+			<img id="box6" src="blank.png" onclick="toggleBox('box6')" />
+			<img id="box7" src="blank.png" onclick="toggleBox('box7')" />
+			<img id="box8" src="blank.png" onclick="toggleBox('box8')" />
+			<img id="box9" src="blank.png" onclick="toggleBox('box9')" />
+		</div>
 
-      // Show the captured photo
-      // The inline CSS rules are used to resize the image
-      //
-      smallImage.src = "data:image/jpeg;base64," + imageData;
-    }
-    
-	// Called when a photo is successfully retrieved
-    //
-    function onPhotoFileSuccess(imageData) {
-      // Get image handle
-      console.log(JSON.stringify(imageData));
-      
-   	  // Get image handle
-      //
-      var smallImage = document.getElementById('smallImage');
-
-      // Unhide image elements
-      //
-      smallImage.style.display = 'block';
-
-      // Show the captured photo
-      // The inline CSS rules are used to resize the image
-      //
-      smallImage.src = imageData;
-    }
-
-    // Called when a photo is successfully retrieved
-    //
-    function onPhotoURISuccess(imageURI) {
-      // Uncomment to view the image file URI 
-      // console.log(imageURI);
-
-      // Get image handle
-      //
-      var largeImage = document.getElementById('largeImage');
-
-      // Unhide image elements
-      //
-      largeImage.style.display = 'block';
-
-      // Show the captured photo
-      // The inline CSS rules are used to resize the image
-      //
-      largeImage.src = imageURI;
-    }
-
-    // A button will call this function
-    //
-    function capturePhotoWithData() {
-      // Take picture using device camera and retrieve image as base64-encoded string
-      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50, destinationType: Camera.DestinationType.DATA_URL });
-    }
-
-    function capturePhotoWithFile() {
-        navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50, destinationType: Camera.DestinationType.FILE_URI });
-    }
-    
-    // A button will call this function
-    //
-    function getPhoto(source) {
-      // Retrieve image file location from specified source
-      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
-        destinationType: destinationType.FILE_URI,
-        sourceType: source });
-    }
-
-    // Called if something bad happens.
-    // 
-    function onFail(message) {
-      alert('Failed because: ' + message);
-    }
-
-    </script>
-  </head>
-  <body>
-	<h1>Simple Photo</h1>
-    <button onclick="capturePhotoWithData();">Capture Photo With Image Data</button> <br>
-    <button onclick="capturePhotoWithFile();">Capture Photo With Image File URI</button> <br>
-    <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
-    <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
-    <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
-    <img style="display:none;" id="largeImage" src="" />
-  </body>
+	</body>
 </html>

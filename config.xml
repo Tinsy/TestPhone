@@ -2,16 +2,16 @@
     <widget xmlns   = "http://www.w3.org/ns/widgets"
         xmlns:gap   = "http://phonegap.com/ns/1.0"
 	xmlns:android   = "http://schemas.android.com/apk/res/android"
-        id          = "edu.iupui.n300.SimplePhoto"
+        id          = "edu.iupui.n300.TicTacToe"
         version     = "1.0.0" >
 
-    <name>Simple Photo</name>
+    <name>Tic Tac Toe</name>
 
     <description>
-        A simple photo tool.
+        A tic tac toe game
     </description>
 
-    <author href="https://github.com/ProfessorKevinForbes/Simple-Photo" email="professorkevinforbes@gmail.com">
+    <author href="https://github.com/ProfessorKevinForbes/TicTacToe4" email="professorkevinforbes@gmail.com">
         Kevin Forbes
     </author>
 
@@ -26,6 +26,8 @@
               android:targetSdkVersion="19"
               android:maxSdkVersion="19" />
 
+
+
 <feature name="Camera">
     <param name="ios-package" value="CDVCamera" />
 </feature>
@@ -36,5 +38,7 @@
 
 <gap:plugin name="org.apache.cordova.camera" version="0.3.2" />
 <gap:plugin name="org.apache.cordova.media" version="0.2.13" />
+
+
 
 </widget>
